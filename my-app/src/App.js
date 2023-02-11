@@ -4,8 +4,8 @@ import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer } f
 import { useRef, useState } from 'react';
 
 const centerPos = {
-  lat: 48.8584,
-  lng: 2.2945
+	lat: 48.8584,
+	lng: 2.2945
 };
 
 const GoogleMapOptions = {
@@ -34,18 +34,17 @@ function App() {
 	if (!isLoaded) return <SkeletonText/>;
 
 	async function calculateRoute() {
-	if (originRef.current.value === '' || destiantionRef.current.value === '') {
-		return
-	}
+		if (originRef.current.value === '' || destiantionRef.current.value === '') return;
 
-	// eslint-disable-next-line no-undef
-	const directionsService = new google.maps.DirectionsService()
-	const results = await directionsService.route({
-		origin: originRef.current.value,
-		destination: destiantionRef.current.value,
 		// eslint-disable-next-line no-undef
-		travelMode: google.maps.TravelMode.DRIVING,
-	})
+		const directionsService = new google.maps.DirectionsService()
+		const results = await directionsService.route({
+			origin: originRef.current.value,
+			destination: destiantionRef.current.value,
+			// eslint-disable-next-line no-undef
+			travelMode: google.maps.TravelMode.DRIVING,
+		})
+
 		setDirectionsResponse(results)
 		setDistance(results.routes[0].legs[0].distance.text)
 		setDuration(results.routes[0].legs[0].duration.text)
@@ -72,7 +71,7 @@ function App() {
 					)}
 				</GoogleMap>
 			</Box>
-			
+
 			<Box p={4} borderRadius='lg' m={4} bgColor='white' shadow='base' minW='container.md' zIndex='1'>
 				<HStack spacing={2} justifyContent='space-between'>
 					<Box flexGrow={1}>
@@ -98,7 +97,7 @@ function App() {
 						onClick={() => {
 							map.panTo(centerPos);
 							map.setZoom(15);
-							}}/>
+						}}/>
 				</HStack>
 			</Box>
 		</Flex>
